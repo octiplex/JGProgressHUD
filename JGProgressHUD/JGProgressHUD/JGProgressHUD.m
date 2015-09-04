@@ -304,7 +304,21 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
         self.indicatorView.frame = JGProgressHUD_CGRectIntegral(indicatorFrame);
     }
     
-    if (self.layoutChangeAnimationDuration > 0.0f && animated && !_transitioning) {
+    if (self.layoutChangeAnimationDuration > 0.0f && animated && !_transitioning)
+    {
+        CGRect startIndicatorFrame = indicatorFrame;
+        startIndicatorFrame.origin.y -= size.height;
+        CGRect startLabelFrame = labelFrame;
+        startLabelFrame.origin.y += size.height;
+        CGRect startDetailFrame = detailFrame;
+        startDetailFrame.origin.y += size.height;
+        
+        if (animateIndicator) {
+            self.indicatorView.frame = startIndicatorFrame;
+        }
+        
+        _textLabel.frame = JGProgressHUD_CGRectIntegral(startLabelFrame);
+        _detailTextLabel.frame = JGProgressHUD_CGRectIntegral(startDetailFrame);
         [UIView animateWithDuration:self.layoutChangeAnimationDuration delay:0.0 options:UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionCurveEaseInOut animations:updates completion:nil];
     }
     else {
@@ -730,7 +744,7 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
         [self.contentView addSubview:self.indicatorView];
     }
     
-    [self updateHUDAnimated:YES animateIndicatorViewFrame:NO];
+    [self updateHUDAnimated:YES animateIndicatorViewFrame:YES];
 }
 
 - (void)setMarginInsets:(UIEdgeInsets)marginInsets {
