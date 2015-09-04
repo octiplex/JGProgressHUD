@@ -319,7 +319,7 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
         
         _textLabel.frame = JGProgressHUD_CGRectIntegral(startLabelFrame);
         _detailTextLabel.frame = JGProgressHUD_CGRectIntegral(startDetailFrame);
-        [UIView animateWithDuration:self.layoutChangeAnimationDuration delay:0.0 options:UIViewAnimationOptionAllowAnimatedContent | UIViewAnimationOptionCurveEaseInOut animations:updates completion:nil];
+        [UIView animateWithDuration:self.layoutChangeAnimationDuration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:25 options:UIViewAnimationOptionAllowAnimatedContent animations:updates completion:nil];
     }
     else {
         updates();
@@ -546,7 +546,7 @@ static CGRect keyboardFrame = (CGRect){{0.0f, 0.0f}, {0.0f, 0.0f}};
 
 - (void)orientationChanged {
     if (self.targetView && !CGRectEqualToRect(self.bounds, self.targetView.bounds)) {
-        [UIView animateWithDuration:(iPad ? 0.4 : 0.3) delay:0.0 options:UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut animations:^{
+        [UIView animateWithDuration:(iPad ? 0.4 : 0.3) delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             self.frame = [self fullFrameInView:self.targetView];
             [self updateHUDAnimated:NO animateIndicatorViewFrame:YES];
         } completion:nil];

@@ -35,9 +35,9 @@
     
     self.progressHUD.hidden = NO;
     
-    [UIView animateWithDuration:self.duration delay:0.0 options:self.animationOptions animations:^{
+    [UIView animateWithDuration:self.duration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:self.animationOptions animations:^{
         self.progressHUD.alpha = 1.0f;
-    } completion:^(BOOL __unused finished) {
+    } completion:^(BOOL finished) {
         [self animationFinished];
     }];
 }
@@ -47,11 +47,12 @@
 - (void)hide {
     [super hide];
     
-    [UIView animateWithDuration:self.duration delay:0.0 options:self.animationOptions animations:^{
+    [UIView animateWithDuration:self.duration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:self.animationOptions animations:^{
         self.progressHUD.alpha = 0.0f;
     } completion:^(BOOL __unused finished) {
         [self animationFinished];
     }];
+    
 }
 
 @end

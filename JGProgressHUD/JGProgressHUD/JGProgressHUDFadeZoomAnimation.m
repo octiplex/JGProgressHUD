@@ -35,18 +35,19 @@
     
     self.progressHUD.hidden = NO;
     
-    [UIView animateWithDuration:totalDuration delay:0.0 options:(UIViewAnimationOptions)(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut) animations:^{
+    [UIView animateWithDuration:totalDuration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.progressHUD.alpha = 1.0f;
     } completion:nil];
     
-    [UIView animateWithDuration:self.shrinkAnimationDuaration delay:0.0 options:(UIViewAnimationOptions)(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState) animations:^{
+    [UIView animateWithDuration:self.shrinkAnimationDuaration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.progressHUD.HUDView.transform = CGAffineTransformMakeScale(self.expandScale.width, self.expandScale.height);
-    } completion:^(BOOL __unused _finished) {
-        [UIView animateWithDuration:self.expandAnimationDuaration delay:0.0 options:(UIViewAnimationOptions)(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState) animations:^{
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:self.expandAnimationDuaration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options: UIViewAnimationOptionBeginFromCurrentState animations:^{
             self.progressHUD.HUDView.transform = CGAffineTransformIdentity;
         } completion:^(BOOL __unused __finished) {
             [self animationFinished];
         }];
+        
     }];
 }
 
@@ -57,14 +58,14 @@
     
     NSTimeInterval totalDuration = self.expandAnimationDuaration+self.shrinkAnimationDuaration;
     
-    [UIView animateWithDuration:totalDuration delay:0.0 options:(UIViewAnimationOptions)(UIViewAnimationOptionBeginFromCurrentState | UIViewAnimationOptionCurveEaseInOut) animations:^{
+    [UIView animateWithDuration:totalDuration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.progressHUD.alpha = 0.0f;
     } completion:nil];
     
-    [UIView animateWithDuration:self.expandAnimationDuaration delay:0.0 options:(UIViewAnimationOptions)(UIViewAnimationOptionCurveEaseIn | UIViewAnimationOptionBeginFromCurrentState) animations:^{
+    [UIView animateWithDuration:self.expandAnimationDuaration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
         self.progressHUD.HUDView.transform = CGAffineTransformMakeScale(self.expandScale.width, self.expandScale.height);
     } completion:^(BOOL __unused _finished) {
-        [UIView animateWithDuration:self.shrinkAnimationDuaration delay:0.0 options:(UIViewAnimationOptions)(UIViewAnimationOptionCurveEaseOut | UIViewAnimationOptionBeginFromCurrentState) animations:^{
+        [UIView animateWithDuration:self.shrinkAnimationDuaration delay:0.0 usingSpringWithDamping:1 initialSpringVelocity:10 options:UIViewAnimationOptionBeginFromCurrentState animations:^{
             self.progressHUD.HUDView.transform = CGAffineTransformMakeScale(0.1f, 0.1f);
         } completion:^(BOOL __unused __finished) {
             self.progressHUD.HUDView.transform = CGAffineTransformIdentity;
